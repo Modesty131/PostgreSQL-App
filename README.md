@@ -1,4 +1,18 @@
-# Express.js + PostgreSQL CRUD API with Docker
+PostgreSQL APP
+In my final 3MTT mini project, I Create a simple Express.js API that connects to a PostgreSQL database and perform basic database operations (CRUD - create, read, update, delete).
+
+Project Overview
+Goal: Build a REST API with endpoints to Create, Read, Update, and Delete users from a PostgreSQL database.
+
+Dependencies:
+
+express – Web framework
+
+pg – PostgreSQL client for Node.js
+
+cors – Enable cross-origin requests
+
+morgan – Request logging
 
 ## Setup with Docker
 
