@@ -1,67 +1,81 @@
-# PostgreSQL-App
+# Express.js + PostgreSQL CRUD API with Docker
 
-In my final 3MTT mini project, I created a simple Expree.js API to store and retrieve data that connects to a PostgreSQL database and perform basic database operations (CRUD - create, read, update, delete).
+## Setup with Docker
 
-Project Overview
-Goal: Build a REST API with endpoints to Create, Read, Update, and Delete users from a PostgreSQL database.
+1. Copy `.env.example` to `.env`:
+```
+cp .env.example .env
+```
 
-Dependencies:
+2. Build and run containers:
+```
+docker-compose up --build
+```
 
-express – Web framework
+3. Create `users` table:
+```
+docker exec -it <db_container_id> psql -U postgres -d mydb -c "
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name HASSAN(100),
+  email HASSAN(100),
+  age INTEGER
+);
+"
+```
 
-pg – PostgreSQL client for Node.js
+4. API is available at `http://localhost:3000`
 
-cors – Enable cross-origin requests
+---
 
-morgan – Request logging
+## Endpoints
 
-Testing with Postman
-Create a user
+- **GET /** – Test API
+- **GET /users** – Retrieve all users
+- **GET /users/:id** – Retrieve single user
+- **POST /users** – Create new user
+- **PUT /users/:id** – Update user
+- **DELETE /users/:id** – Delete user
+
+---
+
+## Example Postman Requests
+
+### Create User
+```
 POST http://localhost:3000/users
 Content-Type: application/json
 
 {
   "name": "Tijani",
   "email": "tijani@example.com",
-  "age": 28
+  "age": 25
 }
-Get all users
+```
+
+### Get All Users
+```
 GET http://localhost:3000/users
+```
 
-Get user by ID
+### Get User By ID
+```
 GET http://localhost:3000/users/1
+```
 
-Update user
+### Update User
+```
 PUT http://localhost:3000/users/1
 Content-Type: application/json
 
 {
   "name": "Tijani Updated",
   "email": "tijani@newmail.com",
-  "age": 29
+  "age": 26
 }
+```
 
-Delete user
+### Delete User
+```
 DELETE http://localhost:3000/users/1
-
-Plan to add migration script:
-Add dbInit.js file that:
-
-Connects to PostgreSQL.
-
-Checks if users table exists.
-
-Creates it if not present.
-
-Modify server.js to run migration on startup automatically.
-
-Updated Structure
-dbInit.js – Migration logic
-
-server.js – Runs dbInit() before starting Express server
-
-Included in Docker setup (works automatically inside container)
-
-Thank you
-
-Get all usersGet all users
+```
